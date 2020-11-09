@@ -16,11 +16,11 @@ func TestMerge(t *testing.T) {
 		expected []int
 	}{
 		{
-			nums1:    []int{0},
-			m:        0,
-			nums2:    []int{1},
-			n:        1,
-			expected: []int{0, 1},
+			nums1:    []int{1, 2, 3, 0, 0, 0},
+			m:        3,
+			nums2:    []int{2, 5, 6},
+			n:        3,
+			expected: []int{1, 2, 2, 3, 5, 6},
 		},
 	}
 

@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestTwoSum(t *testing.T) {
+func TestReplaceElements(t *testing.T) {
 	cases := []struct {
 		nums     []int
 		expected []int
@@ -25,8 +25,8 @@ func TestTwoSum(t *testing.T) {
 	}
 }
 
-func BenchmarkTwoSum(b *testing.B) {
+func BenchmarkReplaceElements(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		replaceElements([]int{})
+		replaceElements([]int{17, 18, 5, 4, 6, 1})
 	}
 }
