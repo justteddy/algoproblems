@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsPalindrome(t *testing.T) {
+func TestMergeTwoLists(t *testing.T) {
 	t.Run("case 1", func(t *testing.T) {
 		var l1 *ListNode
 
