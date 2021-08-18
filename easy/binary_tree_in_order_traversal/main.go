@@ -54,18 +54,20 @@ type TreeNode struct {
 
 // recursive solution
 func inorderTraversal(root *TreeNode) []int {
-	return traverse(root, []int{})
-}
+	result := make([]int, 0)
 
-func traverse(node *TreeNode, result []int) []int {
-	if node == nil {
-		return result
+	var traverse func(*TreeNode)
+	traverse = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+
+		traverse(node.Left)
+		result = append(result, node.Val)
+		traverse(node.Right)
 	}
 
-	result = traverse(node.Left, result)
-	result = append(result, node.Val)
-	result = traverse(node.Right, result)
-
+	traverse(root)
 	return result
 }
 

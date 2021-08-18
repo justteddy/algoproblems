@@ -3,11 +3,11 @@ package main
 import "fmt"
 
 /*
-	Given the root of a binary tree, return the preorder traversal of its nodes' values.
+	Given the root of a binary tree, return the inorder traversal of its nodes' values.
 
 	Example 1:
 	Input: root = [1,null,2,3]
-	Output: [1,2,3]
+	Output: [1,3,2]
 
 	Example 2:
 	Input: root = []
@@ -19,7 +19,7 @@ import "fmt"
 
 	Example 4:
 	Input: root = [1,2]
-	Output: [1,2]
+	Output: [2,1]
 
 	Example 5:
 	Input: root = [1,null,2]
@@ -31,19 +31,18 @@ import "fmt"
 */
 func main() {
 	tree := &TreeNode{
-		Val:  1,
-		Left: nil,
-		Right: &TreeNode{
-			Val: 2,
-			Left: &TreeNode{
-				Val:   3,
+		Val: 3,
+		Left: &TreeNode{
+			Val:  1,
+			Left: nil,
+			Right: &TreeNode{
+				Val:   2,
 				Left:  nil,
 				Right: nil,
 			},
-			Right: nil,
 		},
 	}
-	fmt.Println(preorderTraversal(tree))
+	fmt.Println(postorderTraversal(tree))
 }
 
 type TreeNode struct {
@@ -53,40 +52,41 @@ type TreeNode struct {
 }
 
 // recursive solution
-func preorderTraversal(root *TreeNode) []int {
+func postorderTraversal(root *TreeNode) []int {
 	result := make([]int, 0)
 
-	var traverse func(*TreeNode)
+	var traverse func(node *TreeNode)
 	traverse = func(node *TreeNode) {
 		if node == nil {
 			return
 		}
-		result = append(result, node.Val)
 		traverse(node.Left)
 		traverse(node.Right)
+		result = append(result, node.Val)
 	}
-
 	traverse(root)
 	return result
 }
 
 // iterative solution
-func preorderTraversalIterative(root *TreeNode) []int {
+func postorderTraversalIterative(root *TreeNode) []int {
 	if root == nil {
 		return nil
 	}
 
 	result := make([]int, 0)
 	stack := new(Stack)
-	stack.Push(root)
+	curr := root
 
-	for !stack.IsEmpty() {
-		node := stack.Pop()
-		if node != nil {
-			result = append(result, node.Val)
-			stack.Push(node.Right)
-			stack.Push(node.Left)
+	for curr != nil || !stack.IsEmpty() {
+		for curr != nil {
+			stack.Push(curr)
+			curr = curr.Left
 		}
+
+		curr = stack.Pop()
+		result = append(result, curr.Val)
+		curr = curr.Right
 	}
 
 	return result
