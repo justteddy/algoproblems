@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"container/list"
+	"fmt"
+)
 
 /*
 	Given the root of a binary tree, return the inorder traversal of its nodes' values.
@@ -42,7 +45,7 @@ func main() {
 			},
 		},
 	}
-	fmt.Println(postorderTraversal(tree))
+	fmt.Println(postorderTraversalIterative(tree))
 }
 
 type TreeNode struct {
@@ -74,19 +77,26 @@ func postorderTraversalIterative(root *TreeNode) []int {
 		return nil
 	}
 
-	result := make([]int, 0)
+	list := list.New()
 	stack := new(Stack)
-	curr := root
+	stack.Push(root)
 
-	for curr != nil || !stack.IsEmpty() {
-		for curr != nil {
-			stack.Push(curr)
-			curr = curr.Left
+	for !stack.IsEmpty() {
+		curr := stack.Pop()
+		list.PushFront(curr.Val)
+		if curr.Left != nil {
+			stack.Push(curr.Left)
 		}
+		if curr.Right != nil {
+			stack.Push(curr.Right)
+		}
+	}
 
-		curr = stack.Pop()
-		result = append(result, curr.Val)
-		curr = curr.Right
+	result := make([]int, 0, list.Len())
+	head := list.Front()
+	for head != nil {
+		result = append(result, head.Value.(int))
+		head = head.Next()
 	}
 
 	return result
