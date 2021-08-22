@@ -34,10 +34,11 @@ func levelOrder(root *TreeNode) [][]int {
 		return nil
 	}
 
-	var traverseLevel func([]*TreeNode) ([]int, []*TreeNode)
-	traverseLevel = func(nodes []*TreeNode) ([]int, []*TreeNode) {
-		next := make([]*TreeNode, 0)
+	result := make([][]int, 0)
+	nodes := []*TreeNode{root}
+	for len(nodes) != 0 {
 		vals := make([]int, 0, len(nodes))
+		next := make([]*TreeNode, 0)
 		for _, node := range nodes {
 			vals = append(vals, node.Val)
 			if node.Left != nil {
@@ -47,15 +48,9 @@ func levelOrder(root *TreeNode) [][]int {
 				next = append(next, node.Right)
 			}
 		}
-		return vals, next
-	}
 
-	result := make([][]int, 0)
-	vals := make([]int, 0)
-	next := []*TreeNode{root}
-	for len(next) != 0 {
-		vals, next = traverseLevel(next)
 		result = append(result, vals)
+		nodes = next
 	}
 
 	return result
