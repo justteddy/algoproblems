@@ -32,6 +32,10 @@ func Test_TraverseDFSPostOrderRecursive(t *testing.T) {
 	assert.Equal(t, []int{6, 18, 16, 12, 25, 40, 35, 32, 20}, binary_tree.TraverseDFSPostOrderRecursive(treeExample()))
 }
 
+func Test_TraverseDFSPostOrderIterative(t *testing.T) {
+	assert.Equal(t, []int{6, 18, 16, 12, 25, 40, 35, 32, 20}, binary_tree.TraverseDFSPostOrderIterative(treeExample()))
+}
+
 /*
 		 [20]
 		/    \

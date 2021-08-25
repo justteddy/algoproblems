@@ -77,13 +77,13 @@ func postorderTraversalIterative(root *TreeNode) []int {
 		return nil
 	}
 
-	list := list.New()
+	ls := list.New()
 	stack := new(Stack)
 	stack.Push(root)
 
 	for !stack.IsEmpty() {
 		curr := stack.Pop()
-		list.PushFront(curr.Val)
+		ls.PushFront(curr.Val)
 		if curr.Left != nil {
 			stack.Push(curr.Left)
 		}
@@ -92,8 +92,8 @@ func postorderTraversalIterative(root *TreeNode) []int {
 		}
 	}
 
-	result := make([]int, 0, list.Len())
-	head := list.Front()
+	result := make([]int, 0, ls.Len())
+	head := ls.Front()
 	for head != nil {
 		result = append(result, head.Value.(int))
 		head = head.Next()

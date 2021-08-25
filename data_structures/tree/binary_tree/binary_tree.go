@@ -1,6 +1,8 @@
 package binary_tree
 
 import (
+	"container/list"
+
 	"leetcode/data_structures/queue"
 	"leetcode/data_structures/stack"
 )
@@ -128,5 +130,33 @@ func TraverseDFSPostOrderRecursive(root *BinaryNode) []int {
 	}
 
 	traverse(root)
+	return result
+}
+
+// TraverseDFSPostOrderIterative depth first search traversal postorder
+func TraverseDFSPostOrderIterative(root *BinaryNode) []int {
+	ls := list.New()
+	st := new(stack.Stack)
+	st.Push(root)
+
+	for !st.IsEmpty() {
+		node := st.Pop().(*BinaryNode)
+		ls.PushFront(node.Val)
+
+		if node.Left != nil {
+			st.Push(node.Left)
+		}
+		if node.Right != nil {
+			st.Push(node.Right)
+		}
+	}
+
+	result := make([]int, 0, ls.Len())
+	curr := ls.Front()
+	for curr != nil {
+		result = append(result, curr.Value.(int))
+		curr = curr.Next()
+	}
+
 	return result
 }
