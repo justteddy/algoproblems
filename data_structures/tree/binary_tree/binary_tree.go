@@ -1,6 +1,9 @@
-package tree
+package binary_tree
 
-import "leetcode/data_structures/queue"
+import (
+	"leetcode/data_structures/queue"
+	"leetcode/data_structures/stack"
+)
 
 type BinaryNode struct {
 	Val   int
@@ -51,6 +54,27 @@ func TraverseDFSPreOrderRecursive(root *BinaryNode) []int {
 	return result
 }
 
+// TraverseDFSPreOrderIterative depth first search traversal preorder
+func TraverseDFSPreOrderIterative(root *BinaryNode) []int {
+	result := make([]int, 0)
+	st := new(stack.Stack)
+	st.Push(root)
+
+	for !st.IsEmpty() {
+		node := st.Pop().(*BinaryNode)
+		result = append(result, node.Val)
+
+		if node.Right != nil {
+			st.Push(node.Right)
+		}
+		if node.Left != nil {
+			st.Push(node.Left)
+		}
+	}
+
+	return result
+}
+
 // TraverseDFSInOrderRecursive depth first search traversal inorder
 func TraverseDFSInOrderRecursive(root *BinaryNode) []int {
 	result := make([]int, 0)
@@ -66,6 +90,26 @@ func TraverseDFSInOrderRecursive(root *BinaryNode) []int {
 	}
 
 	traverse(root)
+	return result
+}
+
+// TraverseDFSInOrderIterative depth first search traversal inorder
+func TraverseDFSInOrderIterative(root *BinaryNode) []int {
+	result := make([]int, 0)
+	st := new(stack.Stack)
+	node := root
+
+	for node != nil || !st.IsEmpty() {
+		for node != nil {
+			st.Push(node)
+			node = node.Left
+		}
+
+		node = st.Pop().(*BinaryNode)
+		result = append(result, node.Val)
+		node = node.Right
+	}
+
 	return result
 }
 
