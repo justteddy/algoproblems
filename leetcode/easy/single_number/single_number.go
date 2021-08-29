@@ -18,17 +18,9 @@ package single_number
 */
 
 func singleNumber(nums []int) int {
-	hashT := make(map[int]struct{})
+	result := 0
 	for _, num := range nums {
-		if _, ok := hashT[num]; ok {
-			delete(hashT, num)
-			continue
-		}
-		hashT[num] = struct{}{}
+		result ^= num
 	}
-
-	for i := range hashT {
-		return i
-	}
-	return -1
+	return result
 }
