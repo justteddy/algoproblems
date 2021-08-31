@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 	A string is a valid parentheses string (denoted VPS) if it meets one of the following:
