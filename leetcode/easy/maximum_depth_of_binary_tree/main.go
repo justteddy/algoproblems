@@ -49,18 +49,24 @@ type TreeNode struct {
 
 // recursive solution
 func maxDepth(root *TreeNode) int {
-	if root == nil {
-		return 0
+	var depthFn func(node *TreeNode, depth int) int
+	depthFn = func(node *TreeNode, depth int) int {
+		if node == nil {
+			return depth
+		}
+
+		left := depthFn(node.Left, depth+1)
+		right := depthFn(node.Right, depth+1)
+
+		if left > right {
+			return left
+		}
+
+		return right
+
 	}
 
-	left := maxDepth(root.Left)
-	right := maxDepth(root.Right)
-
-	if left > right {
-		return left + 1
-	}
-
-	return right + 1
+	return depthFn(root, 0)
 }
 
 // iterative, BFS solutions
