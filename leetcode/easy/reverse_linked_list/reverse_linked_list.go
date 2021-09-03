@@ -16,21 +16,22 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// iterative solution
 func reverseList2(head *ListNode) *ListNode {
-	crt := head
 	var prev *ListNode
-
-	for crt != nil {
-		nextTmp := crt.Next
-		crt.Next = prev
-		prev = crt
-		crt = nextTmp
+	node := head
+	for node != nil {
+		next := node.Next
+		node.Next = prev
+		prev = node
+		node = next
 	}
 
 	return prev
 }
 
-func reverseList(head *ListNode) *ListNode {
+// recursive solution 1
+func reverseList1(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -38,4 +39,19 @@ func reverseList(head *ListNode) *ListNode {
 	head.Next.Next = head
 	head.Next = nil
 	return p
+}
+
+// recursive solution 2
+func reverseList(head *ListNode) *ListNode {
+	return reverse(head, nil)
+}
+
+func reverse(node, prev *ListNode) *ListNode {
+	if node == nil {
+		return prev
+	}
+
+	next := node.Next
+	node.Next = prev
+	return reverse(next, node)
 }
