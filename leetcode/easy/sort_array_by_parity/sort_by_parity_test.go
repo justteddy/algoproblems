@@ -1,4 +1,4 @@
-package sort_by_parity
+package sort_array_by_parity
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ func TestSort_by_parity(t *testing.T) {
 	}{
 		{
 			nums:     []int{3, 1, 2, 4},
-			expected: []int{2, 4, 3, 1},
+			expected: []int{4, 2, 1, 3},
 		},
 	}
 
