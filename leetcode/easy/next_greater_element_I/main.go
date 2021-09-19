@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// https://leetcode.com/problems/next-greater-element-i/
 func main() {
 	fmt.Println(nextGreaterElement([]int{4, 1, 2}, []int{1, 3, 4, 2}))
 }
