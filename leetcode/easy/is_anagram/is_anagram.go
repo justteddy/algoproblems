@@ -12,35 +12,47 @@ package is_anagram
 	Output: false
 */
 
+// sum solution
 func isAnagram(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
 
-	dict := make(map[uint8]int)
-	for i := 0; i <= len(s)-1; i++ {
-		if _, ok := dict[s[i]]; !ok {
-			dict[s[i]] = 1
-			continue
-		}
-		dict[s[i]]++
+	var alphabet [26]int
+	for i := 0; i < len(s); i++ {
+		alphabet[s[i]-'a']++
 	}
 
-	for i := 0; i <= len(t)-1; i++ {
-		if _, ok := dict[t[i]]; !ok {
-			return false
-		}
-		dict[t[i]]--
-		if dict[t[i]] < 0 {
-			return false
-		}
+	for i := 0; i < len(t); i++ {
+		alphabet[t[i]-'a']--
 	}
 
-	for _, v := range dict {
-		if v != 0 {
+	for _, a := range alphabet {
+		if a != 0 {
 			return false
 		}
 	}
 
 	return true
+}
+
+// hash map solution
+func isAnagram_(s string, t string) bool {
+	dict := make(map[uint8]int)
+	for i := 0; i < len(s); i++ {
+		dict[s[i]]++
+	}
+
+	for i := 0; i < len(t); i++ {
+		_, ok := dict[t[i]]
+		if !ok {
+			return false
+		}
+		dict[t[i]]--
+		if dict[t[i]] == 0 {
+			delete(dict, t[i])
+		}
+	}
+
+	return len(dict) == 0
 }

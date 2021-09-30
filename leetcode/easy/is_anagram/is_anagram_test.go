@@ -28,6 +28,16 @@ func TestIsAnagram(t *testing.T) {
 			s2:       "bb",
 			expected: false,
 		},
+		{
+			s1:       "ab",
+			s2:       "a",
+			expected: false,
+		},
+		{
+			s1:       "aa",
+			s2:       "a",
+			expected: false,
+		},
 	}
 
 	for i, c := range cases {
