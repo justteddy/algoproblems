@@ -30,7 +30,6 @@ func subsetXORSum(nums []int) int {
 		}
 		sum += xorSum
 	}
-
 	return sum
 }
 
