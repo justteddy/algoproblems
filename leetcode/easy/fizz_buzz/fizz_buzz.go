@@ -1,7 +1,7 @@
 package fizz_buzz
 
 import (
-	"strconv"
+	"fmt"
 )
 
 /*
@@ -32,23 +32,19 @@ import (
 */
 
 func fizzBuzz(n int) []string {
-	res := make([]string, 0, n)
+	answer := make([]string, 0, n)
 	for i := 1; i <= n; i++ {
-		mod3 := i % 3
-		mod5 := i % 5
-		if mod3 == 0 && mod5 == 0 {
-			res = append(res, "FizzBuzz")
-			continue
+		ans := ""
+		if i%3 == 0 {
+			ans += "Fizz"
 		}
-		if mod3 == 0 {
-			res = append(res, "Fizz")
-			continue
+		if i%5 == 0 {
+			ans += "Buzz"
 		}
-		if mod5 == 0 {
-			res = append(res, "Buzz")
-			continue
+		if ans == "" {
+			ans = fmt.Sprintf("%d", i)
 		}
-		res = append(res, strconv.Itoa(i))
+		answer = append(answer, ans)
 	}
-	return res
+	return answer
 }
