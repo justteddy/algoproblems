@@ -27,7 +27,7 @@ import "sort"
    Output: 0
 */
 
-func heightChecker(heights []int) int {
+func heightChecker_(heights []int) int {
 	s := make([]int, len(heights))
 	copy(s, heights)
 	sort.Ints(s)
@@ -39,4 +39,21 @@ func heightChecker(heights []int) int {
 		}
 	}
 	return cnt
+}
+
+func heightChecker(heights []int) int {
+	count := make([]int, 101)
+	for i := 0; i < len(heights); i++ {
+		count[heights[i]]++
+	}
+	ans := 0
+	for i, j := 1, 0; i < len(count); i++ {
+		for k := count[i]; k > 0; k-- {
+			if i != heights[j] {
+				ans++
+			}
+			j++
+		}
+	}
+	return ans
 }
