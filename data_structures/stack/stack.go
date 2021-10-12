@@ -4,6 +4,7 @@ type Stack []interface{}
 
 func (s *Stack) IsEmpty() bool       { return len(*s) == 0 }
 func (s *Stack) Len() int            { return len(*s) }
+func (s *Stack) Peek() interface{}   { return (*s)[len(*s)-1] }
 func (s *Stack) Push(el interface{}) { *s = append(*s, el) }
 func (s *Stack) Pop() interface{} {
 	if s.IsEmpty() {
