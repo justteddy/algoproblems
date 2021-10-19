@@ -12,16 +12,13 @@ package replace_with_greatest
 func replaceElements(arr []int) []int {
 	max := 0
 	for i := len(arr) - 1; i >= 0; i-- {
-		if i == len(arr)-1 {
-			max = arr[i]
-			arr[i] = -1
-			continue
-		}
-		if arr[i] > max {
-			max, arr[i] = arr[i], max
-		} else {
-			arr[i] = max
+		tmp := arr[i]
+		arr[i] = max
+		if tmp > max {
+			max = tmp
 		}
 	}
+
+	arr[len(arr)-1] = -1
 	return arr
 }
