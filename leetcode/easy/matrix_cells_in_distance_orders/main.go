@@ -12,10 +12,8 @@ func allCellsDistOrder(rows int, cols int, rCenter int, cCenter int) [][]int {
 
 	seen := make(map[string]struct{})
 	dirs := [][2]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}
-
 	queue := make([][2]int, 0)
 	queue = append(queue, [2]int{rCenter, cCenter})
-
 	for len(queue) != 0 {
 		cell := queue[0]
 		queue = queue[1:]
