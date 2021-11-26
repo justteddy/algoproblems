@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // https://leetcode.com/problems/count-binary-substrings/
 func main() {
@@ -11,7 +13,6 @@ func countBinarySubstrings(s string) int {
 	if len(s) == 1 {
 		return 0
 	}
-
 	groups := make([]int, 0)
 	prev, cnt := s[0], 1
 	for i := 1; i < len(s); i++ {
