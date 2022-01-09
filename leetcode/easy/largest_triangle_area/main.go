@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // https://leetcode.com/problems/largest-triangle-area/
 func main() {
