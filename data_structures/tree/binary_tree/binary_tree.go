@@ -2,7 +2,6 @@ package binary_tree
 
 import (
 	"container/list"
-
 	"leetcode/data_structures/queue"
 	"leetcode/data_structures/stack"
 )
@@ -51,7 +50,6 @@ func TraverseDFSPreOrderRecursive(root *BinaryNode) []int {
 		traverse(node.Left)
 		traverse(node.Right)
 	}
-
 	traverse(root)
 	return result
 }
