@@ -25,3 +25,20 @@ func findMaxConsecutiveOnes(nums []int) int {
 	}
 	return max
 }
+
+func findMaxConsecutiveOnes2(nums []int) int {
+	curr := 0
+	mx := 0
+	for _, v := range nums {
+		if v == 1 {
+			curr++
+			continue
+		}
+		if curr > mx {
+			mx = curr
+		}
+		curr = 0
+	}
+
+	return max(mx, curr)
+}
